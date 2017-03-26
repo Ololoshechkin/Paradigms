@@ -14,7 +14,7 @@ public class Main {
         String exprText = sc.nextLine();
         Parser parser = new ExpressionParser();
         TripleExpression expr = parser.parse(exprText);
-        System.out.println(expr);
+        System.out.println("parsed expression : " + expr);
         int x = sc.nextInt(), y = sc.nextInt(), z = sc.nextInt();
         System.out.println(expr.evaluate(x, y, z));
 
