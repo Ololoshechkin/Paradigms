@@ -1,0 +1,100 @@
+dequeue
+push 1964167652
+peek
+remove
+enqueue 863680137
+isEmpty
+size
+element
+push -1466841487
+clear
+peek
+size
+clear
+enqueue -903212652
+push 1634611320
+peek
+clear
+enqueue -1399882067
+size
+peek
+push -133628836
+isEmpty
+element
+dequeue
+size
+enqueue -1105926888
+dequeue
+enqueue 1650920258
+element
+dequeue
+push -690517495
+element
+element
+element
+enqueue -1643494230
+enqueue 1780789442
+size
+push -1118085100
+dequeue
+push 389529349
+dequeue
+element
+remove
+remove
+clear
+isEmpty
+dequeue
+element
+isEmpty
+peek
+peek
+peek
+peek
+dequeue
+enqueue -1324350047
+clear
+element
+size
+push 2055181832
+peek
+peek
+enqueue 504800950
+remove
+enqueue -2024186054
+element
+enqueue 1588943783
+peek
+dequeue
+size
+isEmpty
+dequeue
+remove
+peek
+push -1003236724
+enqueue -1649513992
+isEmpty
+dequeue
+peek
+size
+clear
+peek
+size
+peek
+size
+push 479051491
+remove
+push 395098618
+enqueue 1391889728
+enqueue 1456753261
+dequeue
+isEmpty
+isEmpty
+size
+push -762155012
+push 352998589
+peek
+element
+enqueue 1522920775
+size
+isEmpty
