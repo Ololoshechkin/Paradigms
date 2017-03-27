@@ -19,6 +19,8 @@ public class Main {
         int x = sc.nextInt(), y = sc.nextInt(), z = sc.nextInt();
         System.out.println(expr.evaluate(x, y, z));
         int x = 16;
+        String s = "Fuck you are";
+        //!!!!!!
     }
 
 }
