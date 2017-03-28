@@ -5,6 +5,9 @@ package ru.ifmo.ctddev.brilyantov.expressions.expressions;
  */
 public class Subtract extends AbstractBinary {
 
+    public Subtract() {
+    }
+
     public Subtract(SomeExpression leftOperand, SomeExpression rightOperand) {
         super(leftOperand, rightOperand);
     }
@@ -17,6 +20,11 @@ public class Subtract extends AbstractBinary {
     @Override
     protected double operator(double leftValue, double rightValue) {
         return leftValue - rightValue;
+    }
+
+    @Override
+    public Subtract getNewInstance(SomeExpression leftOperand, SomeExpression rightOperand) {
+        return new Subtract(leftOperand, rightOperand);
     }
 
 

@@ -5,6 +5,9 @@ package ru.ifmo.ctddev.brilyantov.expressions.expressions;
  */
 public class Multiply extends AbstractBinary {
 
+    public Multiply() {
+    }
+
     public Multiply(SomeExpression leftOperand, SomeExpression rightOperand) {
         super(leftOperand, rightOperand);
     }
@@ -19,6 +22,10 @@ public class Multiply extends AbstractBinary {
         return leftValue * rightValue;
     }
 
+    @Override
+    public Multiply getNewInstance(SomeExpression leftOperand, SomeExpression rightOperand) {
+        return new Multiply(leftOperand, rightOperand);
+    }
 
     protected String getOperatorName() {
         return "*";

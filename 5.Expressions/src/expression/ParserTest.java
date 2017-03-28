@@ -64,8 +64,11 @@ public class ParserTest {
     }
 
     public static void main(final String[] args) {
+        long startTime = System.currentTimeMillis();
         checkAssert(ParserTest.class);
         new ParserTest().test();
+        long endTime = System.currentTimeMillis();
+        System.out.println("time : " + (endTime - startTime));
     }
 
     private static void checkAssert(Class<ParserTest> parserTestClass) {

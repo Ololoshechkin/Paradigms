@@ -9,7 +9,11 @@ public abstract class AbstractBinary implements SomeExpression {
     private SomeExpression leftOperand;
     private SomeExpression rightOperand;
 
-    protected AbstractBinary(SomeExpression leftOperand, SomeExpression rightOperand) {
+    public AbstractBinary() {
+        this(null, null);
+    }
+
+    public AbstractBinary(SomeExpression leftOperand, SomeExpression rightOperand) {
         this.leftOperand = leftOperand;
         this.rightOperand = rightOperand;
     }
@@ -27,7 +31,10 @@ public abstract class AbstractBinary implements SomeExpression {
     }
 
     public String toString() {
-        return "(" + leftOperand.toString() + getOperatorName() + rightOperand.toString() + ")";
+        if (leftOperand == null && rightOperand == null) {
+            return getOperatorName();
+        }
+        return "(" + leftOperand.toString() + ")" + getOperatorName() + "(" + rightOperand.toString() + ")";
     }
 
     protected abstract String getOperatorName();
@@ -36,5 +43,6 @@ public abstract class AbstractBinary implements SomeExpression {
 
     protected abstract double operator(double leftValue, double rightValue);
 
+    public abstract AbstractBinary getNewInstance(SomeExpression leftOperand, SomeExpression rightOperand);
 
 }

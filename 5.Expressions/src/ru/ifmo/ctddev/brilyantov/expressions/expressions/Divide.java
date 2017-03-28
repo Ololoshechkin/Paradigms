@@ -5,6 +5,9 @@ package ru.ifmo.ctddev.brilyantov.expressions.expressions;
  */
 public class Divide extends AbstractBinary {
 
+    public Divide() {
+    }
+
     public Divide(SomeExpression leftOperand, SomeExpression rightOperand) {
         super(leftOperand, rightOperand);
     }
@@ -17,6 +20,11 @@ public class Divide extends AbstractBinary {
     @Override
     protected double operator(double leftValue, double rightValue) {
         return leftValue / rightValue;
+    }
+
+    @Override
+    public Divide getNewInstance(SomeExpression leftOperand, SomeExpression rightOperand) {
+        return new Divide(leftOperand, rightOperand);
     }
 
 

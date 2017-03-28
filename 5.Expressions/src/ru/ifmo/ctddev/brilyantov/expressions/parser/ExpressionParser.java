@@ -2,89 +2,63 @@ package ru.ifmo.ctddev.brilyantov.expressions.parser;
 
 import ru.ifmo.ctddev.brilyantov.expressions.expressions.*;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.StringTokenizer;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Vadim on 25.03.17.
  */
+
 public class ExpressionParser implements Parser {
-
-    private int currentPtr;
-
-    private String expression;
-
-    public ExpressionParser() {
-        currentPtr = 0;
-    }
-
-    private Const parseConst() {
-        int value = 0;
-        while (currentPtr < expression.length() && Character.isDigit(expression.charAt(currentPtr))) {
-            value *= 10;
-            value += Character.getNumericValue(expression.charAt(currentPtr));
-            currentPtr++;
-        }
-        return new Const(value);
-    }
-
-    private Variable parseVar() {
-        String varName = ((Character) expression.charAt(currentPtr)).toString();
-        currentPtr++;
-        return new Variable(varName);
-    }
-
-    private TripleExpression parseMultipliement() {
-        // multipliement = (expr) or const or {x, y, z} or -expr ...
-        if (expression.charAt(currentPtr) == '(') {
-            currentPtr++;
-            TripleExpression answer = parseExpr();
-            currentPtr++;
-            return answer;
-        }
-        if (expression.charAt(currentPtr) == '-') {
-            currentPtr++;
-            return new Subtract(
-                    new Const(0),
-                    (SomeExpression) parseMultipliement()
-            );
-        }
-        return (Character.isDigit(expression.charAt(currentPtr)) ? parseConst() : parseVar());
-    }
-
-    private TripleExpression parseSummand() {
-        // summand = multipliement1 */ multipliement2 */ ...
-        TripleExpression expr = parseMultipliement();
-        while (currentPtr < expression.length() && (expression.charAt(currentPtr) == '*' || expression.charAt(currentPtr) == '/')) {
-            char currentOperation = expression.charAt(currentPtr);
-            currentPtr++;
-            if (currentOperation == '*') {
-                expr = new Multiply((SomeExpression) expr, (SomeExpression) parseMultipliement());
-            } else {
-                expr = new Divide((SomeExpression) expr, (SomeExpression) parseMultipliement());
-            }
-        }
-        return expr;
-    }
-
-    private TripleExpression parseExpr() {
-        // expr = summand1 +- summand2 +- ...
-        TripleExpression expr = parseSummand();
-        while (currentPtr < expression.length() && (expression.charAt(currentPtr) == '+' || expression.charAt(currentPtr) == '-')) {
-            char currentOperation = expression.charAt(currentPtr);
-            currentPtr++;
-            if (currentOperation == '+') {
-                expr = new Add((SomeExpression) expr, (SomeExpression) parseSummand());
-            } else {
-                expr = new Subtract((SomeExpression) expr, (SomeExpression) parseSummand());
-            }
-        }
-        return expr;
-    }
 
     @Override
     public TripleExpression parse(String expression) {
-        this.expression = expression.replaceAll("\\p{javaWhitespace}", "");
-        return parseExpr();
+        Deque<String> expressionUnits = new ArrayDeque<>();
+        String operationsRegex = "\\*\\*|[\\+\\-\\*\\/]|<<|>>|[xyz]|abs|log|square|sqrt|mod|[0-9]+";
+        Pattern operations = Pattern.compile(operationsRegex);
+        Matcher operationsMatcher = operations.matcher(expression.replaceAll("\\p{javaWhitespace}", ""));
+
+        String[] sArr = operations.split(expression.replaceAll("\\p{javaWhitespace}", ""));
+
+        while (operationsMatcher.find()) {
+            expressionUnits.push(operationsMatcher.group());
+        }
+
+        //StringTokenizer st = new StringTokenizer(expression.replaceAll("\\p{javaWhitespace}", ""), "+-*/()", true);
+        /*
+        while (st.hasMoreTokens()) {
+            expressionUnits.push(st.nextToken());
+        }
+        // NOTEBENE : StringTokenizer takes 4 times less time (experimental fact)!!!
+        */
+
+        BinaryOperatorParser mulParser = new BinaryOperatorParser(
+                new AbstractBinary[]{new Multiply(), new Divide(), new Mod()}
+        );
+        BinaryOperatorParser powParser = new BinaryOperatorParser(
+                mulParser,
+                new AbstractBinary[]{new Pow()}
+        );
+        BinaryOperatorParser sumParser = new BinaryOperatorParser(
+                powParser,
+                new AbstractBinary[]{new Add(), new Subtract()}
+        );
+        BinaryOperatorParser shiftParser = new BinaryOperatorParser(
+                sumParser,
+                new AbstractBinary[]{new LeftShift(), new RightShift()}
+        );
+        AnyUnaryParser anyUnaryParser = new AnyUnaryParser(
+                sumParser,
+                new AbstractUnary[]{new UnaryMinus(), new Log(), new Abs(), new Square(), new SquareRoot()}
+        );
+        mulParser.nextPriorityOperationParser = anyUnaryParser;
+        TripleExpression answer = shiftParser.parse(expressionUnits);
+        return answer;
     }
 
 }
