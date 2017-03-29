@@ -1,7 +1,5 @@
 package expression;
 
-import ru.ifmo.ctddev.brilyantov.expressions.expressions.*;
-
 import static expression.Util.*;
 
 /**

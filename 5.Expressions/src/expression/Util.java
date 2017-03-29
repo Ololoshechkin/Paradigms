@@ -8,7 +8,7 @@ import java.util.stream.Stream;
  * @author Georgiy Korneev (kgeorgiy@kgeorgiy.info)
  */
 public class Util {
-    public static final Random RNG = new Random(59L);
+    public static final Random RNG = new Random(60L);
 
     // Utility class
     private Util() {}
@@ -34,7 +34,7 @@ public class Util {
                 Math.abs(actual - expected) < precision ||
                         Math.abs(actual - expected) < precision * Math.abs(actual) ||
                         (Double.isNaN(actual) || Double.isInfinite(actual)) &&
-                                (Double.isNaN(expected) || Double.isInfinite(expected))
+                        (Double.isNaN(expected) || Double.isInfinite(expected))
         );
     }
 

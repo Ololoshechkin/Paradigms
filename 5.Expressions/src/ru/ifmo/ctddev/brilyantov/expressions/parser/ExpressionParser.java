@@ -19,7 +19,8 @@ public class ExpressionParser implements Parser {
     @Override
     public TripleExpression parse(String expression) {
         Deque<String> expressionUnits = new ArrayDeque<>();
-        String operationsRegex = "\\*\\*|[\\+\\-\\*\\/]|<<|>>|[xyz]|abs|log|square|sqrt|mod|[0-9]+";
+
+        String operationsRegex = "\\*\\*|[\\+\\-\\*\\/]|<<|>>|[xyz]|abs|log|square|sqrt|mod|\\(|\\)|\\^|&|\\||[0-9]+";
         Pattern operations = Pattern.compile(operationsRegex);
         Matcher operationsMatcher = operations.matcher(expression.replaceAll("\\p{javaWhitespace}", ""));
 
@@ -29,23 +30,11 @@ public class ExpressionParser implements Parser {
             expressionUnits.push(operationsMatcher.group());
         }
 
-        //StringTokenizer st = new StringTokenizer(expression.replaceAll("\\p{javaWhitespace}", ""), "+-*/()", true);
-        /*
-        while (st.hasMoreTokens()) {
-            expressionUnits.push(st.nextToken());
-        }
-        // NOTEBENE : StringTokenizer takes 4 times less time (experimental fact)!!!
-        */
-
         BinaryOperatorParser mulParser = new BinaryOperatorParser(
                 new AbstractBinary[]{new Multiply(), new Divide(), new Mod()}
         );
-        BinaryOperatorParser powParser = new BinaryOperatorParser(
-                mulParser,
-                new AbstractBinary[]{new Pow()}
-        );
         BinaryOperatorParser sumParser = new BinaryOperatorParser(
-                powParser,
+                mulParser,
                 new AbstractBinary[]{new Add(), new Subtract()}
         );
         BinaryOperatorParser shiftParser = new BinaryOperatorParser(
@@ -53,10 +42,11 @@ public class ExpressionParser implements Parser {
                 new AbstractBinary[]{new LeftShift(), new RightShift()}
         );
         AnyUnaryParser anyUnaryParser = new AnyUnaryParser(
-                sumParser,
+                shiftParser,
                 new AbstractUnary[]{new UnaryMinus(), new Log(), new Abs(), new Square(), new SquareRoot()}
         );
         mulParser.nextPriorityOperationParser = anyUnaryParser;
+
         TripleExpression answer = shiftParser.parse(expressionUnits);
         return answer;
     }

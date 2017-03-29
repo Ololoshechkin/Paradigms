@@ -22,6 +22,7 @@ public class StupidExpressionParser implements Parser {
         return new Const(value);
     }
 
+
     private Variable parseVar() {
         String varName = expressionUnits[currentPtr];
         currentPtr++;
@@ -109,7 +110,6 @@ public class StupidExpressionParser implements Parser {
             expressionUnits[i] = exprTokens.nextToken();
         }
         TripleExpression answer = parseExpr();
-        //System.out.println("MY parser expr : " + answer);
         expressionUnits = null;
         return answer;
     }

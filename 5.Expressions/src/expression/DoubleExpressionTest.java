@@ -1,7 +1,5 @@
 package expression;
 
-import ru.ifmo.ctddev.brilyantov.expressions.expressions.*;
-
 import static expression.Util.*;
 
 /**
@@ -21,8 +19,8 @@ public class DoubleExpressionTest {
         testExpression(
                 "x*x+(x-1)/10",
                 new Add(
-                        new Multiply(new Variable("x"), new Variable("x")),
-                        new Divide(new Subtract(new Variable("x"), new Const(1)), new Const(10))
+                    new Multiply(new Variable("x"), new Variable("x")),
+                    new Divide(new Subtract(new Variable("x"), new Const(1)), new Const(10))
                 ),
                 x -> x * x + (x - 1) / 10
         );
