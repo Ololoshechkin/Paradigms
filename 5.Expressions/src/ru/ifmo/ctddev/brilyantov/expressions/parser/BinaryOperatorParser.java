@@ -9,12 +9,12 @@ import java.util.StringTokenizer;
 /**
  * Created by Vadim on 27.03.17.
  */
-class BinaryOperatorParser implements OperatorParser {
+public class BinaryOperatorParser implements OperatorParser {
 
-    OperatorParser nextPriorityOperationParser;
-    AbstractBinary[] expressionInstances;
+    public OperatorParser nextPriorityOperationParser;
+    public AbstractBinary[] expressionInstances;
 
-    boolean isMentionedOperator(String s) {
+    private boolean isMentionedOperator(String s) {
         for (AbstractBinary operator : expressionInstances) {
             if (s.equals(operator.toString())) {
                 return true;
@@ -23,11 +23,11 @@ class BinaryOperatorParser implements OperatorParser {
         return false;
     }
 
-    BinaryOperatorParser(AbstractBinary[] expressionInstances) {
+    public BinaryOperatorParser(AbstractBinary... expressionInstances) {
         this(null, expressionInstances);
     }
 
-    BinaryOperatorParser(OperatorParser nextPriorityOperationParser, AbstractBinary[] expressionInstances) {
+    public BinaryOperatorParser(OperatorParser nextPriorityOperationParser, AbstractBinary... expressionInstances) {
         this.nextPriorityOperationParser = nextPriorityOperationParser;
         this.expressionInstances = expressionInstances;
     }

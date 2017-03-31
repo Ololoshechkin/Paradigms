@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
  * Created by Vadim on 27.03.17.
  */
 
-interface OperatorParser {
+public interface OperatorParser {
 
     SomeExpression parse(Deque<String> expressionUnits);
 

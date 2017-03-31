@@ -1,10 +1,8 @@
-import ru.ifmo.ctddev.brilyantov.expressions.expressions.*;
+import ru.ifmo.ctddev.brilyantov.expressions.expressions.TripleExpression;
 import ru.ifmo.ctddev.brilyantov.expressions.parser.ExpressionParser;
 import ru.ifmo.ctddev.brilyantov.expressions.parser.Parser;
 
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by Vadim on 19.03.17.

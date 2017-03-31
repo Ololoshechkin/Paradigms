@@ -11,13 +11,15 @@ import java.util.StringTokenizer;
 /**
  * Created by Vadim on 28.03.17.
  */
-class AnyUnaryParser implements OperatorParser {
 
-    BinaryOperatorParser baseOperationParser;
-    AbstractUnary[] expressionInstances;
+public class AnyUnaryParser implements OperatorParser {
 
-    AnyUnaryParser(BinaryOperatorParser baseOperationParser,
-                   AbstractUnary[] expressionInstances) {
+    public static final Const ZERO = new Const(0);
+    public BinaryOperatorParser baseOperationParser;
+    public AbstractUnary[] expressionInstances;
+
+    public AnyUnaryParser(BinaryOperatorParser baseOperationParser,
+                   AbstractUnary... expressionInstances) {
         this.baseOperationParser = baseOperationParser;
         this.expressionInstances = expressionInstances;
     }
@@ -53,7 +55,7 @@ class AnyUnaryParser implements OperatorParser {
                 return unary.getNewInstance(parse(expressionUnits));
             }
         }
-        return new Const(0); // TODO throw exception
+        return ZERO; // TODO throw exception
     }
 
 }
