@@ -14,7 +14,16 @@ public class SquareRoot extends AbstractUnary {
 
     @Override
     public int operator(int value) {
-        return (int) Math.sqrt((double) value);
+        int l = 0, r = 46341, m;
+        while (r != l + 1) {
+            m = (l + r) / 2;
+            if (m * m <= value) {
+                l = m;
+            } else {
+                r = m;
+            }
+        }
+        return l;
     }
 
     @Override

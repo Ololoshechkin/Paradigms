@@ -1,13 +1,13 @@
 package expression;
 
 import static expression.Util.*;
-
 import ru.ifmo.ctddev.brilyantov.expressions.expressions.*;
+import ru.ifmo.ctddev.brilyantov.expressions.parser.*;
+
 
 /**
  * @author Georgiy Korneev (kgeorgiy@kgeorgiy.info)
  */
-
 public class ExpressionTest {
     public static void main(final String[] args) {
         checkAssert(ExpressionTest.class);

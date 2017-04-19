@@ -38,12 +38,14 @@ public class ExpressionParser implements Parser {
     }
 
     @Override
-    public TripleExpression parse(String expr) {
+    public TripleExpression parse(String expression) {
         Deque<String> expressionUnits = new ArrayDeque<>();
-        String expression = expr.replaceAll("\\p{javaWhitespace}", "");
 
         for (int i = 0; i < expression.length(); i++) {
             char c = expression.charAt(i);
+            if (Character.isWhitespace(c)) {
+                continue;
+            }
             switch (c) {
                 case '+':
                     expressionUnits.push("+");
@@ -98,5 +100,4 @@ public class ExpressionParser implements Parser {
 
         return baseOperatorParser.parse(expressionUnits);
     }
-
 }

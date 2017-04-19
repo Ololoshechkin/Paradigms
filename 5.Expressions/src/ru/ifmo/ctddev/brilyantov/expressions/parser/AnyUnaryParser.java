@@ -25,11 +25,11 @@ public class AnyUnaryParser implements OperatorParser {
     }
 
     private boolean isConst(String s) {
-        return s.matches("\\d+");
+        return Character.isDigit(s.charAt(0));
     }
 
     private boolean isVar(String s) {
-        return s.matches("[xyz]");
+        return s.equals("x") || s.equals("y") || s.equals("z");
     }
 
     private boolean isOpenBracket(String s) {

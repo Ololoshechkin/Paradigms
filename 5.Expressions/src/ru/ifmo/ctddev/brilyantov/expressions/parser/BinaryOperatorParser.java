@@ -46,5 +46,4 @@ public class BinaryOperatorParser implements OperatorParser {
         }
         return expr;
     }
-
 }
