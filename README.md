@@ -19,3 +19,9 @@ and priorities in math expressions context.
 
 6. Modification of 5th task. Now programm also throws exceptions and prints informative messages to user. Also some operators
 added : unary(log2, pow2) and binary(min, max with sintax "a max b" and "a min b").
+
+7. JavaScript Functional expressions parser. Expressions should be performed in poland notation.
+Operations : +, -, *, /, negate, min3, max5.
+Variables : x, y, z, u, v, w
+Literals : x, y, z
+Constants :  pi, e
