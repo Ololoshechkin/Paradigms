@@ -24,35 +24,19 @@ function anyNary(operator) {
         var expressions = arguments;
         return function () {
             var ans = [], args = arguments;
-            Object.keys(expressions).forEach(function (i) {
-                ans.push(expressions[i].apply(undefined, args));
-            });
+            Object.keys(expressions).forEach(i => {ans.push(expressions[i].apply(undefined, args));});
             return operator.apply(undefined, ans);
         }
     }
 }
 
-var add = anyNary(function (l, r) {
-    return l + r;
-});
-var subtract = anyNary(function (l, r) {
-    return l - r;
-});
-var multiply = anyNary(function (l, r) {
-    return l * r;
-});
-var divide = anyNary(function (l, r) {
-    return l / r;
-});
-var negate = anyNary(function (x) {
-    return -x;
-});
-var min3 = anyNary(function (x, y, z) {
-    return Math.min(x, y, z)
-});
-var max5 = anyNary(function (x, y, z, a, b) {
-    return Math.max(x, y, z, a, b)
-});
+var add = anyNary((l, r) => l + r);
+var subtract = anyNary((l, r) => l - r);
+var multiply = anyNary((l, r) => l * r);
+var divide = anyNary((l, r) => l / r);
+var negate = anyNary(x => -x);
+var min3 = anyNary((x, y, z) => Math.min(x, y, z));
+var max5 = anyNary((x, y, z, a, b) => Math.max(x, y, z, a, b));
 
 function getOperationByList(list) {
     return function (expr) {
@@ -96,9 +80,9 @@ function parse(exprPoland) {
     var stack = [];
     for (var i = 0; i < tokens.length; i++) {
         var token = tokens[i];
-        var variants = [getConst(token), getOperation(token), getVariable(token), getLiteral(token)].filter(function (value) {
-            return value !== undefined;
-        });
+        var variants = [getConst(token), getOperation(token), getVariable(token), getLiteral(token)].filter(
+            value => value !== undefined
+        );
         for (var j = 0; j < variants.length; j++) {
             var currentVariant = variants[j];
             var expr = currentVariant[0];
@@ -114,4 +98,4 @@ function parse(exprPoland) {
     return stack[0];
 }
 
-console.log(parse("x y - pi e 5 min3 *")(3, -5));
+console.log(parse("x y - pi e 5 min3 * negate")(3, -5));
