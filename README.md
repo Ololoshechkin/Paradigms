@@ -25,3 +25,11 @@ Operations : +, -, *, /, negate, min3, max5.
 Variables : x, y, z, u, v, w
 Literals : x, y, z
 Constants :  pi, e
+
+
+8. JavaScript Object Oriented expressions parser.
+Operations : +, -, *, /, negate, pow, log, sqr, sqrt.
+Variables : x, y, z, u, v, w
+Supports dirivatives (.diff() method) of each expression
+Supports toString() method
+Supports simplify() method - simplifies each expression (calculating constant expressions, deleting *1, *0, +0 etc.)
