@@ -1,8 +1,8 @@
-#ITMO University paradigms course
-##1. Getting programm arguments in command line, parsing them not to contain whitespace symbols and printing their sum
+# ITMO University paradigms course
+## 1. Getting programm arguments in command line, parsing them not to contain whitespace symbols and printing their sum
 Modification : parsing in decimal and in octadecimal radix
 
-##2. Design by contract(DbC). It contains 2 implimentations of binsearch algorithm with full contract in comments.<br />
+## 2. Design by contract(DbC). It contains 2 implimentations of binsearch algorithm with full contract in comments.<br />
 Modification : number of elements equal to some number.<br />
 <br />
 ##3. ArrayQueue implimentation in 3 different OOP concepts: 1) class methods, 2) ADT (OOP without syntax sugar of missing the<br />
