@@ -1,4 +1,5 @@
 ITMO University paradigms course<br />
+<br />
 1. Getting programm arguments in command line, parsing them not to contain whitespace symbols and printing their sum<br />
 Modification : parsing in decimal and in octadecimal radix<br />
 <br />
