@@ -5,8 +5,7 @@ Modification : parsing in decimal and in octadecimal radix
 ## 2. Design by contract(DbC). It contains 2 implimentations of binsearch algorithm with full contract in comments.<br />
 Modification : number of elements equal to some number.
 
-## 3. ArrayQueue implimentation in 3 different OOP concepts: 1) class methods, 2) ADT (OOP without syntax sugar of missing the<br />
-first argument), 3) classical OOP implementation<br />
+## 3. ArrayQueue implimentation in 3 different OOP concepts: 1) class methods, 2) ADT (OOP without syntax sugar of missing the first argument), 3) classical OOP implementation<br />
 Modification: Deque methods<br />
 <br />
 ## 4. LinkedQueue. Implementation of common interface and abstract class of task3 ArrayQueue and LinkedQueue.<br />
